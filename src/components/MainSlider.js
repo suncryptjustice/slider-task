@@ -28,7 +28,6 @@ const MainSlider = (props) => {
 
   const scrollToIndex = React.useCallback(
     (index = activePage) => {
-      console.log(index);
       scrollRef.current.scrollTo({
         left: scrollRef.current.offsetWidth * index,
         behavior: "smooth",
@@ -37,11 +36,18 @@ const MainSlider = (props) => {
     [activePage]
   );
 
+  const resizeHandler = React.useCallback(() => {
+    scrollRef.current.scrollTo({
+      left: scrollRef.current.offsetWidth * activePage,
+      behavior: "smooth",
+    });
+  }, [activePage]);
+
   React.useLayoutEffect(() => {
-    window.addEventListener("resize", scrollToIndex);
+    window.addEventListener("resize", resizeHandler);
     scrollToIndex();
-    return () => window.removeEventListener("resize", scrollToIndex);
-  }, [scrollToIndex]);
+    return () => window.removeEventListener("resize", resizeHandler);
+  }, [scrollToIndex, resizeHandler]);
 
   return (
     <div ref={scrollRef} className="MainSlider">
