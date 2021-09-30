@@ -6,18 +6,21 @@ import Layout from "./components/Layout";
 function App() {
   const [activePage, setActivePage] = React.useState(0);
 
-  const handleHomeBtnClicked = () => {
+  const handleHomeBtnClicked = React.useCallback(() => {
     setActivePage(0);
-  };
+  }, [setActivePage]);
 
-  const handlePageChange = (index) => {
-    setActivePage(index);
-  };
+  const handlePageChange = React.useCallback(
+    (index) => {
+      setActivePage(index);
+    },
+    [setActivePage]
+  );
 
   return (
     <Layout homeBtnWasClicked={handleHomeBtnClicked}>
       <MainSlider pageChange={handlePageChange} activePage={activePage}>
-        <Page text="First" bg="red" on />
+        <Page text="First" bg="red" />
         <Page text="Second" bg="teal" />
         <Page text="Third" bg="yellow" />
       </MainSlider>
