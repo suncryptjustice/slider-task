@@ -24,28 +24,28 @@ function App() {
         <Page style={{ backgroundColor: "red" }}>
           <img
             style={{ height: "100%", width: "100%", objectFit: "scale-down" }}
-            src={`.${img1}`}
+            src={img1}
             alt="bird listen music"
           />
         </Page>
         <Page style={{ backgroundColor: "teal" }}>
           <img
             style={{ height: "100%", width: "100%", objectFit: "scale-down" }}
-            src={`.${img2}`}
+            src={img2}
             alt="interior"
           />
         </Page>
         <Page style={{ backgroundColor: "orange" }}>
           <img
             style={{ height: "100%", width: "100%", objectFit: "scale-down" }}
-            src={`.${img3}`}
+            src={img3}
             alt="juice"
           />
         </Page>
         <Page style={{ backgroundColor: "purple" }}>
           <img
             style={{ height: "100%", width: "100%", objectFit: "scale-down" }}
-            src={`.${img4}`}
+            src={img4}
             alt="gift"
           />
         </Page>
