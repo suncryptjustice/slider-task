@@ -5,7 +5,7 @@ export const Footer = React.memo(() => {
   return (
     <div className="Footer">
       <p className="truncate">{` © ${new Date().getFullYear()} Suncrypt Workflow `}</p>
-      <img className="FooterImg" src={pirate} alt="pirate" />
+      <img className="FooterImg" src={`.${pirate}`} alt="pirate" />
     </div>
   );
 });
