@@ -1,6 +1,9 @@
 import React from "react";
+import { useIsMobile } from "../hooks/useIsMobile";
+import SliderSwitch from "./SliderSwitch";
 
-const MainSlider = (props) => {
+const MainSlider = React.memo((props) => {
+  const isMobile = useIsMobile();
   const [touchStart, setTouchStart] = React.useState(0);
   const [touchEnd, setTouchEnd] = React.useState(0);
   const scrollRef = React.useRef(null);
@@ -8,7 +11,6 @@ const MainSlider = (props) => {
   const { activePage, pageChange } = props;
 
   const handleTouchStart = React.useCallback((e) => {
-    console.log("start");
     setTouchStart(e.targetTouches[0].clientX);
   }, []);
 
@@ -43,11 +45,38 @@ const MainSlider = (props) => {
     });
   }, [activePage]);
 
+  const handleDotWasClicked = React.useCallback(
+    (value) => {
+      pageChange(value);
+    },
+    [pageChange]
+  );
+
+  const keyPressHandler = React.useCallback(
+    (e) => {
+      if (e.keyCode === 37) {
+        activePage > 0 && pageChange(activePage - 1);
+      }
+      if (e.keyCode === 39) {
+        activePage < React.Children.count(props.children) - 1 &&
+          pageChange(activePage + 1);
+      }
+    },
+    [activePage, pageChange, props.children]
+  );
+
   React.useLayoutEffect(() => {
     window.addEventListener("resize", resizeHandler);
     scrollToIndex();
     return () => window.removeEventListener("resize", resizeHandler);
   }, [scrollToIndex, resizeHandler]);
+
+  React.useEffect(() => {
+    window.addEventListener("keydown", keyPressHandler);
+    return () => {
+      window.removeEventListener("keydown", keyPressHandler);
+    };
+  }, [keyPressHandler]);
 
   return (
     <div ref={scrollRef} className="MainSlider">
@@ -58,8 +87,15 @@ const MainSlider = (props) => {
           handleTouchEnd: handleTouchEnd,
         })
       )}
+      {!isMobile && (
+        <SliderSwitch
+          length={React.Children.count(props.children)}
+          activePage={activePage}
+          dotWasClicked={handleDotWasClicked}
+        />
+      )}
     </div>
   );
-};
+});
 
 export default MainSlider;

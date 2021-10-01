@@ -2,12 +2,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 
-function Header(props) {
+export const Header = React.memo((props) => {
   const { homeBtnWasClicked } = props;
   return (
     <div className="Header">
       <FontAwesomeIcon
-        color="white"
+        color="black"
         onClick={homeBtnWasClicked}
         icon={faHome}
         size="2x"
@@ -15,6 +15,4 @@ function Header(props) {
       />
     </div>
   );
-}
-
-export default Header;
+});

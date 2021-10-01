@@ -1,3 +1,12 @@
+* {
+  user-select: none;
+}
+
+p {
+  margin: 0;
+  font-size: 0.75em;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -10,6 +19,12 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .Layout {
@@ -29,10 +44,27 @@ code {
 }
 
 .Footer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
   position: absolute;
   bottom: 0;
   left: 0;
   padding: 10px 20px;
+  height: 60px;
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .Footer {
+    flex-direction: column-reverse;
+  }
+}
+
+.FooterImg {
+  height: 100%;
 }
 
 .MainSlider {
@@ -41,10 +73,48 @@ code {
   white-space: nowrap;
 }
 
+.SliderSwitch {
+  position: absolute;
+  display: flex;
+  height: 40px;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+@media screen and (max-width: 600px) {
+  .SliderSwitch {
+    height: 20px;
+    bottom: 50px;
+  }
+}
+
+.SliderSwitchDot {
+  display: block;
+  margin: 0 0.5em;
+  width: 0.75em;
+  height: 0.75em;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 100px;
+}
+
+@media screen and (max-width: 600px) {
+  .SliderSwitchDot {
+    width: 0.5em;
+    height: 0.5em;
+  }
+}
+
+.SliderSwitchActiveDot {
+  background: white;
+}
+
 .PageContainer {
   display: inline-block;
   width: 100vw;
   height: 100vh;
+  white-space: nowrap;
 }
 
 .PageContainerTextContainer {

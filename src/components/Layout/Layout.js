@@ -1,8 +1,8 @@
 import React from "react";
-import Footer from "./Footer";
-import Header from "./Header";
+import { Footer } from "./Footer";
+import { Header } from "./Header";
 
-function Layout(props) {
+const Layout = React.memo((props) => {
   const { homeBtnWasClicked } = props;
   return (
     <div className="Layout">
@@ -11,6 +11,6 @@ function Layout(props) {
       <Footer />
     </div>
   );
-}
+});
 
 export default Layout;
