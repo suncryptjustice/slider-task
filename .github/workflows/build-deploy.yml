@@ -15,18 +15,21 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: borales/actions-yarn@v2.3.0
+        uses: actions/checkout@v2
 
       - name: Install Node.js
         uses: actions/setup-node@v1
         with:
           node-version: 13.x
 
-      - name: Install Dependencies
-        run: yarn
+      - name: Install NPM packages
+        run: npm ci
 
       - name: Build project
-        run: yarn build
+        run: npm run build
+
+      - name: Run tests
+        run: npm run test
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v2
@@ -38,7 +41,7 @@ jobs:
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
 
     steps:
       - name: Download artifact
